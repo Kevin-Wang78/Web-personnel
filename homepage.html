@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Kevin Wang - Mon CV interactif</title>
+  <style>
+    /* Style général */
+  body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b); /* Dégradé dynamique */
+    color: white;
+    text-align: center;
+    padding: 120px 20px 80px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre portée douce */
+  }
+
+  header .photo-profil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 27, 42, 0.6); /* Légère transparence */
+    z-index: 0;
+  }
+
+  header h1, header p {
+    position: relative;
+    z-index: 1;
+  }
+
+  header h1 {
+    margin: 0;
+    font-size: 3em;
+    font-weight: 700;
+    margin-top: 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Ombre sur le titre */
+  }
+
+  header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #003366;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  nav a:hover {
+    color: #e0e1dd; /* Effet de survol */
+  }
+
+  section {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Ombre portée douce */
+  }
+
+  h2 {
+    color: #1b263b;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .skills span {
+    display: inline-block;
+    background: #e0e1dd;
+    margin: 5px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+
+  .skills span:hover {
+    background: #003366; /* Effet au survol des compétences */
+    color: white;
+  }
+
+  .timeline {
+    position: relative;
+    margin: 40px 0;
+    padding-left: 40px;
+    border-left: 3px solid #003366;
+  }
+
+  .timeline-entry {
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .timeline-entry::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: #003366;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .timeline-entry h4 {
+    margin: 0;
+    color: #003366;
+    font-weight: 600;
+  }
+
+  .timeline-entry p {
+    margin: 5px 0 0;
+    font-size: 1.1em;
+    color: #333;
+  }
+
+  .filter-buttons {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-buttons button {
+    font-size: 18px;
+    margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #003366;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .filter-buttons button:hover {
+    font-size: 18px;
+    background: #e0e1dd;
+    color: #003366;
+  }
+
+  .project {
+    display: none;
+    margin-bottom: 20px;
+  }
+
+  .project.show {
+    display: block;
+  }
+
+  footer {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+  }
+
+  footer a {
+    color: #e0e1dd;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .PhotoMoi {
+    width: 200px;       /* même largeur */
+    height: 200px;      /* même hauteur */
+    object-fit: cover;  /* pour bien remplir sans déformer */
+    border-radius: 50%;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.3) contrast(1.1);
+   }
+
+   .contact-info1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px; /* espace vertical entre les blocs */
+    margin-bottom: 20px;
+    }
+
+   .contact-info1 button {
+    font-size: 2em;
+    margin: 10px;
+    cursor: pointer;
+    color: #1b263b;
+   }
+
+   .contact-info1 button:hover {
+    transform: scale(1,2);
+    color: #415a77
+   }
+
+   .contact-info1 p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #1b263b
+   }
+
+   .contact-info2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px; /* espace vertical entre les blocs */
+    margin-bottom: 20px;
+    }
+
+   .contact-info2 button {
+    font-size: 2em;
+    margin: 10px;
+    cursor: pointer;
+    color: #1b263b;
+   }
+
+   .contact-info2 button:hover {
+    transform: scale(1,2);
+    color: #415a77
+   }
+
+   .contact-info2 p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #1b263b
+   }
+
+   .contact-info3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px; /* espace vertical entre les blocs */
+    margin-bottom: 20px;
+    }
+
+   .contact-info3 button {
+    font-size: 2em;
+    margin: 10px;
+    cursor: pointer;
+    color: #1b263b;
+   }
+
+   .contact-info3 button:hover {
+    transform: scale(1,2);
+    color: #415a77
+   }
+
+   .contact-info3 p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #1b263b
+   }
+
+   .hidden {
+    display: none;
+   }
+
+   .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
+   }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1b263b;
+    font-size: 0.9em;
+  }
+
+  .skill-item i {
+    font-size: 2em;
+    margin-bottom: 8px;
+    color:#415a77;
+  }
+
+  .skill-item span {
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .skill-item {
+    width: 100px;
+    height: 120px;
+    background-color: #f0f4f8;
+    border: 1px solid #dbe2ef;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .skill-item:hover {
+    transform: scale(1.05);
+  }
+
+  .skill-item i {
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+
+  .skills-item span {
+    font-size: 0.9em;
+    color: #1b263b;
+  };
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="PhotoMoi/PhotoPersonnelle.jpg" alt="PhotoPersonelle" class="PhotoMoi">
+    <h1>Kevin Wang</h1>
+    <p>Étudiant en Mathématiques & Informatique | Passionné d'analyse de données, de résolutions mathématiques et de programmation</p>
+  </header>
+ 
+  <nav>
+    <a href="#a-propos">À propos</a>
+    <a href="#competences">Compétences</a>
+    <a href="#experiences">Expériences professionnelles</a>
+    <a href="#benevolats">Bénévolats</a>
+    <a href="#education">Éducation</a>
+    <a href="#projets">Projets</a>
+    <a href="#bourses">Bourses et distinctions</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="a-propos">
+    <h2>À propos</h2>
+    <p>Un étudiant à l’Université de Montréal dans le programme de Mathématiques et Informatique avec diverses capacités dans les domaines des mathématiques, des statistiques et de l’informatique dont faire des recherches, analyser et résoudre divers types de problèmes et programmer avec quelques langages de programmation.</p>
+  </section>
+
+  <section id="competences">
+    <h2>Compétences</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <i class="fa-brands fa-python" style="color:#306998; font: size 5em;"></i>
+        <span>Python</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-plus-minus" style='font: size 5em'></i>        
+        <span>Mathématiques</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-brands fa-js" style="color:#F7DF1E; font-size: size 5em;"></i>
+        <span>JavaScript</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-brands fa-html5" style="color:#E34C26; font-size: size 5em;"></i>
+        <span>HTML</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-r" style="color:#276DC3; font-size: size 5em;"></i>
+        <span>R</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-brands fa-node-js" style="color:#68A063; font-size: size 5em;"></i>
+        <span>Node.js</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-c" style="color:#68217A; font-size: size 5em;"></i>
+        <span>C sharp</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-terminal" style="color:#333333; font-size: size 5em;"></i>
+        <span>Bash</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-brands fa-react" style="color:#61DAFB; font-size: size 5em;"></i>
+        <span>React Native</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-file-excel" style="color:#217346; font-size: size 5em;"></i>
+        <span>Excel</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-file-word" style="color:#2B579A; font-size: size 5em;"></i>
+        <span>Word Document</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-file-powerpoint" style="color:#B7472A; font-size: size 5em;"></i>
+        <span>Power Point</span>
+      </div>
+
+      <div class="skill-item">
+        <i class="fa-solid fa-atom" style="color:#1F4E79; font-size: size 5em;"></i>
+        <span>ChemDraw</span>
+      </div>
+
+    </div>
+  </section>
+  
+<!-- modifier les styles pour chaque icone apparait dans une case individuelle-->
+
+
+
+
+  <section id="experiences">
+    <h2>Expériences professionnelles</h2>
+    <div class="filter-buttons">
+      <button onclick="filterExperiences('Youtube')">Youtube</button>
+      <button onclick="filterExperiences('Freelance')">Freelance</button>
+      <button onclick="filterExperiences('Aediroum')">Aediroum</button>
+      <button onclick="filterExperiences('UdeM')">UdeM</button>
+      <button onclick="filterExperiences('Millénium')">Millénium Québecor</button>
+      <button onclick="filterExperiences('UdemHacks')">UdemHacks</button>
+      <button onclick="filterExperiences('Costco')">Costco Wholesale</button>
+      <button onclick="filterExperiences('HomeDepot')">Home Depot</button>
+      <button onclick="filterExperiences('CentreSino-Québec')">Centre Sino-Québec de la Rive-Sud</button>
+    </div>
+
+    <div class="project Youtube show">
+      <strong>Vidéaste éducatif</strong> – Création de contenu en mathématiques<br>
+      <em>UdeM · Mai 2025 – Présent</em><br>
+      <ul>
+        <li>Création de vidéos pédagogiques expliquant des notions de Calcul 1 (limites, dérivées, continuité, etc.).</li>
+        <li>Résolution d'exercices avec explications détaillées pour aider d'autres étudiants</li>
+        <li>Utilisation d’outils de capture vidéo et d’édition</li>
+        <li>Chaine YouTube : 
+          <a href="https://www.youtube.com/@kevinxianwang3197" target="_blank">https://www.youtube.com/@kevinxianwang3197</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="project Freelance show">
+      <strong>Tutorat</strong> – Mathématiques<br>
+      <em>Freelance · Février 2025 – Présent</em><br>
+      <ul>
+        <li>Aider les étudiants du secondaire jusqu’au Cégep ayant de la difficulté dans les cours de mathématiques. </li>
+        <li>Créer des rencontres virtuelles pour chaque rencontre.</li>
+        <li>Préparer en avance la matière à enseigner.</li>
+      </ul>
+    </div>
+
+    <div class="project Aediroum show">
+      <strong>Club de CADUM</strong> – Programmation<br>
+      <em>Aediroum · Janvier 2025 – Présent</em><br>
+      <ul>
+        <li>En équipe, programmer avec le langage de JavaScript pour le développement d’une application mobile dédiée aux élèves de l’université pour pouvoir commander de la nourriture.</li>
+        <li>Utiliser CSS et HTML pour le développement de l’application mobile. </li>
+        <li>Utiliser PowerShell pour exécuter les codes et voir l’évolution sur l’application mobile. </li>
+        <li>Gestion et mise en place de la section de Setting de l’application mobile.</li>
+        
+      </ul>
+    </div>
+
+    <div class="project UdeM show">
+      <strong>Tutorat à l’Université</strong> – Mathématiques<br>
+      <em>Université de Montréal · Janvier 2025 – Présent</em><br>
+      <ul>
+        <li>Aider les étudiants de l’université ayant de la difficulté dans le cours d’algèbre linéaire.</li>
+      </ul>
+    </div>
+
+    <div class="project Millénium show">
+      <strong>Défi IA & Justice</strong> – Expérience entrepreunariale<br>
+      <em>Millénium Québecor · Janvier 2025 – Avril 2025</em><br>
+      <ul>
+        <li>Participer à un projet pour trouver des solutions pour les personnes vulnérables grâce à 
+          l’intelligence artificielle face à la justice. 
+        </li>
+        <li>Collaborer avec une compagnie pour les idées de solutions.</li>
+      </ul>
+    </div>
+
+    <div class="project UdemHacks show">
+      <strong>Hackathon: Développeur front-end</strong><br>
+      <em>UdemHacks · Mars 2025 – Mars 2025</em><br>
+      <ul>
+        <li>En équipe, programmer, pendant 24 heures, une application Web en utilisant JavaScript avec HTML</li>
+        <li>Utilisation des frameworks CSS et Node.js</li>
+        <li>Utilisation de Visual Studio Code et de GitHub pour pouvoir partager les fichiers de code et suivre 
+          l'évolution du code
+        </li>
+        <li>Implémentation de Gemini AI comme API</li>
+      </ul>
+    </div>
+
+    <div class="project Costco show">
+      <strong>Service/Marchandisage/Paniers</strong><br>
+      <em>Costco Wholesale · Juin 2023 – Août 2024</em><br>
+      <ul>
+        <li>Aider les caissiers à emballer les produits achetés dans des sacs. </li>
+        <li>Aider à pousser les paniers à l’entrée de l’entrepôt dans différents climats. </li>
+        <li>Faire du stockage avec différents types de produits et différents poids en employant des transpalettes 
+          et à la main. 
+        </li>
+        <li>Gérer le temps à force que le nombre de clients augmentent au fil du temps.</li>
+      </ul>
+    </div>
+
+    <div class="project HomeDepot show">
+      <strong>Assistant de ventes</strong> – Département des portes et fenêtres<br>
+      <em>Home Depot · Juin 2022 – Octobre 2022</em><br>
+      <ul>
+        <li>Utiliser un logiciel pour rechercher des produits que les clients désiraient.</li>
+        <li>Trouver les meilleures portes et les fenêtres selon ce que les clients voulaient. </li>
+        <li>Faire des retours de produits dans les bonnes sections. </li>
+        <li>Utiliser une machine pour la fabrication de clés de maisons et de voitures.</li>
+      </ul>
+    </div>
+
+    <div class="project CentreSino-Québec show">
+      <strong>Assistant de bureaux</strong><br>
+      <em>UdeM · Juin 2021 – Août 2021</em><br>
+      <ul>
+        <li>Proposer des projets/ateliers destinés aux immigrants voulant apprendre le français ou l’anglais. </li>
+        <li>Classifier des documents avec Excel.</li>
+        <li>Proposer des ateliers pour les enfants lors d’événements spéciaux.</li>
+      </ul>
+    </div>
+
+  </section> 
+
+  <section id="benevolats">
+    <h2>Bénévolats</h2>
+    <div class="filter-buttons">
+      <button onclick="filterBenevolats('Cadets')">Cadets de l'Air</button>
+      <button onclick="filterBenevolats('Freelance')">Service à la famille</button>
+    </div>
+
+    <div class="project benevolat Cadets show">
+      <strong>Caporal des sections</strong>
+      <em>Ligue des Cadets de l'Air du Canada · Août 2017 – Septembre 2019</em><br>
+    </div>
+
+    <div class="project benevolat Freelance show">
+      <strong>Bénévole</strong>
+      <em>Service à la Famille Chinoise du Grand Montréal</em><br>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Éducation</h2>
+    <div class="filter-buttons">
+      <button onclick="filterEducation('Udem')">Université de Montréal</button>
+      <button onclick="filterEducation('Brebeuf')">Collège Jean-de-Brébeuf</button>
+      <button onclick="filterEducation('Lucille')">École internationale Lucille-Teasdale</button>
+    </div>
+
+    <div class="project education Udem show">
+      <strong>Université de Montréal</strong>
+      <em>Baccalauréat en Mathématiques et Informatique · Septembre 2024 – Présent</em><br>
+    </div>
+
+    <div class="project education Brebeuf show">
+      <strong>Collège Jean-de-Brébeuf</strong>
+      <em>DEC en Sciences pures et appliquées · Août 2022 – Juin 2024</em><br>
+    </div>
+
+    <div class="project education Lucille show">
+      <strong>École internationale Lucille-Teasdale</strong>
+      <em>DES en programme international (PEI) · Août 2017 – Juin 2022</em><br>
+    </div>
+  </section>
+
+  <section id="projets">
+    <h2>Projets</h2>
+    <div class="filter-buttons">
+      <button onclick="filterProjets('symboles')">La somme des symboles</button>
+      <button onclick="filterProjets('web')">Hackathon - Application Web dans le thème de la santé</button>
+      <button onclick="filterProjets('crypt')">TripleCrypt</button>
+      <button onclick="filterProjets('recherche')">Projet de recherche - Biodiversité et Climatologie</button>
+    </div>
+
+    <div class="project projets symboles show">
+      <strong>La somme des symboles</strong>
+      <em>Université de Montréal · Mars 2025 - Avril 2025 </em><br>
+      <p>Le jeu "La somme des symboles" consiste à trouver la combinaison de 5 nombres pour remplir une grille 5x5 et atteindre les sommes des rangées et colonnes données.</p>
+    </div>
+
+    <div class="project projets web show">
+      <strong>Hackathon - Application Web dans le thème de la santé</strong>
+      <em>UdemHacks · Mars 2025 - Mars 2025</em><br>
+      <p>En équipe de quatre, coder une application qui répond à une problématique dans le domaine de la santé.</p>
+    </div>
+
+    <div class="project projets crypt show">
+      <strong>TripleCrypt</strong>
+      <em>Université de Montréal · Février 2025 - Mars 2025</em><br>
+      <p>En équipe de deux, implémenter trois différents types d'algorithmes permettant de crypter et de décrypter des messages en utilisant Python.</p>
+    </div>
+    
+    <div class="project projets recherche show">
+      <strong>Projet de recherche - Biodiversité et Climatologie</strong>
+      <em>Collège Jean-de-Brébeuf · Septembre 2023 - Mai 2024</em><br>
+      <p>En équipe, produire un projet de recherches sur l’alimentation des fourmis avec un séjour de deux semaines au Costa Rica.</p>
+    </div>
+  </section>
+
+  <section id="bourses">
+    <h2>Prix et distinctions</h2>
+    <div class="filter-buttons">
+      <button onclick="filterBourses('AI')">Bourse pour le Défi IA et justice</button>
+      <button onclick="filterBourses('Etudes')">Bourse d'études</button>
+      <button onclick="filterBourses('Merite')">Certificat de mérite</button>
+      <button onclick="filterBourses('Distinction')">Certificat de distinction</button>
+    </div>
+
+    <div class="project bourses AI show">
+      <strong>Bourse pour le Défi IA et justice</strong>
+      <em>Millénium Québecor · Avril 2025 </em>
+      <p>Bourse remise aux étudiants ayant accompli le projet IA et justice avec succès.</p>
+    </div>
+
+    <div class="project bourses Etudes show">
+      <strong>Bourse d'études </strong>
+      <em>École internationale Lucille-Teasdale · Juin 2022</em>
+      <p>Bourse illustrant les efforts que l'étudiant a mis tout au long de son parcours secondaire.</p>
+    </div>
+
+    <div class="project bourses Merite show">
+      <strong>Certificat de mérite</strong>
+      <em>École internationale Lucille-Teasdale · Juin 2022</em>
+      <p>Certificat décerné aux étudiants pour leur rendement scolaire, leur bonne conduite, leur effort constant au travail, leur assiduité et leur ponctualié aux cours.</p>
+    </div>
+    
+    <div class="project bourses Distinction show">
+      <strong>Certificat de distinction</strong>
+      <em>École internationale Lucille-Teasdale · Février 2018</em>
+      <p>Certificat décerné à l’étudiant de son orchestre ayant le plus démarqué soit par son talent en musique ou soit par sa persévérance tout au long de l’année.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+
+    <div>
+      <button onclick="toggleEmail()"><i class="fa-brands fa-google" style="color: #D44638;"></i></button>
+      <div class="contact-info1">
+        <p id="email" class="hidden"><strong>Email:</strong> kevin.xian.wang@gmail.com</p>
+      </div>
+    </div>
+
+    <div>
+      <button onclick="toggleLinkedin()"><i class="fa-brands fa-linkedin" style="color: #0077B5;"></i></button>
+      <div class="contact-info2">
+        <p id="linkedin" class="hidden"><strong>LinkedIn:</strong> https://www.linkedin.com/in/kevin-xian-wang-b51419268/</p>
+      </div>
+    </div>
+
+    <div>
+      <button onclick="toggleGithub()"><i class="fa-brands fa-github" style="color: #181717;"></i></button>
+      <div class="contact-info3">
+        <p id="github" class="hidden"><strong>GitHub:</strong> https://github.com/Kevin-Wang78</p>
+      </div>
+    </div>
+   
+  </section>
+
+  <footer>
+    <p>© 2025 Kevin Wang — Créé avec passion</p>
+  </footer>
+
+  <script>
+    function filterExperiences(category) {
+      const allProjects = document.querySelectorAll('.project');
+      allProjects.forEach(project => {
+        if (project.classList.contains(category)) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+    }
+
+    function filterBenevolats(category) {
+      const allBenevolats = document.querySelectorAll('.project.benevolat');
+      allBenevolats.forEach(project => {
+        if (project.classList.contains(category)) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+    }
+
+    function filterEducation(category) {
+      const allEducation = document.querySelectorAll('.project.education');
+      allEducation.forEach(project => {
+        if (project.classList.contains(category)) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+    }
+    
+    function filterBourses(category) {
+      const allBourses = document.querySelectorAll('.project.bourses');
+      allBourses.forEach(project => {
+        if (project.classList.contains(category)) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+    }
+
+    function filterProjets(category) {
+      const allProjets = document.querySelectorAll('.project.projets');
+      allProjets.forEach(project => {
+        if (project.classList.contains(category)) {
+          project.classList.add('show');
+        } else {
+          project.classList.remove('show');
+        }
+      });
+    }
+
+    function toggleEmail() {
+      const elements = document.querySelectorAll(".contact-info1 p");
+      elements.forEach(element => {
+        element.classList.toggle("hidden");
+      });
+    }
+
+    function toggleLinkedin() {
+      const elements = document.querySelectorAll(".contact-info2 p");
+      elements.forEach(element => {
+        element.classList.toggle("hidden");
+      });
+    }
+
+    function toggleGithub() {
+      const elements = document.querySelectorAll(".contact-info3 p");
+      elements.forEach(element => {
+        element.classList.toggle("hidden");
+      });
+    }
+  </script>
+</body>
+</html>
